@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty Student Learning Portal | Mrs. Sunita Ramesh Patil</title>
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="appSidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span>EduPortal</span>
+        </div>
+      </div>
+      
+      <div class="sidebar-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="sidebarSearchInput" placeholder="Filter sections..." onkeyup="filterSidebarMenu()">
+      </div>
+      
+      <ul class="sidebar-menu" id="sidebarMenu">
+        <li class="active" data-section="home">
+          <a href="#home"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        </li>
+        <li data-section="about">
+          <a href="#about"><i class="fa-solid fa-user-tie"></i><span>About Professor</span></a>
+        </li>
+        <li data-section="timetable">
+          <a href="#timetable"><i class="fa-solid fa-calendar-days"></i><span>Time Table</span></a>
+        </li>
+        <li data-section="subjects">
+          <a href="#subjects"><i class="fa-solid fa-book-open"></i><span>Subjects Taught</span></a>
+        </li>
+        <li data-section="notes">
+          <a href="#notes"><i class="fa-solid fa-file-pdf"></i><span>Lecture Notes</span></a>
+        </li>
+        <li data-section="quiz">
+          <a href="#quiz"><i class="fa-solid fa-lightbulb"></i><span>Quiz Center</span></a>
+        </li>
+        <li data-section="assignments">
+          <a href="#assignments"><i class="fa-solid fa-file-signature"></i><span>Assignment Portal</span></a>
+        </li>
+        <li data-section="progress">
+          <a href="#progress"><i class="fa-solid fa-chart-line"></i><span>Progress Tracker</span></a>
+        </li>
+        <li data-section="forum">
+          <a href="#forum"><i class="fa-solid fa-comments"></i><span>Discussion Forum</span></a>
+        </li>
+        <li data-section="notifications-panel">
+          <a href="#notifications-panel"><i class="fa-solid fa-bell"></i><span>Notifications</span></a>
+        </li>
+        <li data-section="papers">
+          <a href="#papers"><i class="fa-solid fa-folder-open"></i><span>Previous Papers</span></a>
+        </li>
+        <li data-section="remedial">
+          <a href="#remedial"><i class="fa-solid fa-user-clock"></i><span>Remedial Classes</span></a>
+        </li>
+        <li data-section="slow-corner">
+          <a href="#slow-corner"><i class="fa-solid fa-seedling"></i><span>Slow Learner Corner</span></a>
+        </li>
+        <li data-section="advanced-corner">
+          <a href="#advanced-corner"><i class="fa-solid fa-rocket"></i><span>Advanced Corner</span></a>
+        </li>
+        <li data-section="research">
+          <a href="#research"><i class="fa-solid fa-flask"></i><span>Research Work</span></a>
+        </li>
+        <li data-section="achievements">
+          <a href="#achievements"><i class="fa-solid fa-award"></i><span>Achievements</span></a>
+        </li>
+        <li data-section="resources">
+          <a href="#resources"><i class="fa-solid fa-briefcase"></i><span>Student Resources</span></a>
+        </li>
+        <li data-section="chat-trigger" onclick="toggleChatbot(true)">
+          <a href="#"><i class="fa-solid fa-robot"></i><span>Chatbot Assistant</span></a>
+        </li>
+        <li data-section="gallery">
+          <a href="#gallery"><i class="fa-solid fa-images"></i><span>Gallery</span></a>
+        </li>
+        <li data-section="feedback">
+          <a href="#feedback"><i class="fa-solid fa-comment-dots"></i><span>Student Feedback</span></a>
+        </li>
+        <li data-section="faq">
+          <a href="#faq"><i class="fa-solid fa-circle-question"></i><span>FAQs</span></a>
+        </li>
+        <li data-section="contact">
+          <a href="#contact"><i class="fa-solid fa-address-book"></i><span>Contact Faculty</span></a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="main-workspace">
+      
+      <!-- Sticky Top Header -->
+      <header class="main-header">
+        <div class="header-left">
+          <button class="mobile-toggle" id="mobileSidebarToggle" onclick="toggleMobileSidebar()">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="header-title">
+            <h1 id="pageWorkspaceTitle">Dashboard</h1>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <span class="academic-badge">AY: 2026-27 | Sem-I</span>
+          
+          <!-- Notifications Bell -->
+          <div class="notification-bell" onclick="toggleNotificationsDropdown()">
+            <i class="fa-solid fa-bell"></i>
+            <span class="badge" id="headerNotificationCount">3</span>
+          </div>
+
+          <!-- Notification Dropdown Drawer -->
+          <div class="notification-dropdown" id="notificationDropdown">
+            <div class="dropdown-header">
+              <span>Latest Updates</span>
+              <button class="btn-sm btn-outline-primary" style="padding: 2px 8px;" onclick="markAllNotificationsRead()">Clear All</button>
+            </div>
+            <div class="dropdown-list" id="dropdownNotificationList">
+              <!-- Load dynamically -->
+            </div>
+            <div class="dropdown-footer" onclick="switchPanel('notifications-panel')">
+              View All Notifications
+            </div>
+          </div>
+
+          <!-- Faculty Profile Mini Card -->
+          <div class="faculty-profile-summary">
+            <img src="images/professor.jpg" alt="Mrs. Sunita Ramesh Patil">
+            <div class="profile-info">
+              <span class="name">Mrs. Sunita R. Patil</span>
+              <span class="role">Assistant Professor</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Scrollable Content Body -->
+      <div class="content-body">
+        
+        <!-- SECTION 1: HOME PANEL -->
+        <section class="panel active" id="home">
+          
+          <!-- Welcome Hero Banner -->
+          <div class="welcome-banner">
+            <div class="welcome-banner-content">
+              <h2>Faculty Student Learning Portal</h2>
+              <p>Welcome, students! This workspace is personally managed to support your academic and practical journeys in Computer Engineering. Explore your course web engineering modules, operating system lectures, and core Java programs, practice online quizzes, and stay on top of upcoming milestones.</p>
+              <div class="welcome-banner-buttons">
+                <button class="btn btn-primary" onclick="switchPanel('subjects')">
+                  <i class="fa-solid fa-book-open"></i> Explore Courses
+                </button>
+                <button class="btn btn-outline-white" onclick="switchPanel('progress')">
+                  <i class="fa-solid fa-chart-line"></i> View Tracker
+                </button>
+              </div>
+            </div>
+            <div class="welcome-banner-img">
+              <img src="images/professor.jpg" alt="Mrs. Sunita Ramesh Patil">
+            </div>
+          </div>
+
+          <!-- Dashboard Overview Widget Cards -->
+          <div class="section-header" style="border: none; margin-bottom: 1rem;">
+            <div class="section-title" style="font-size: 1.15rem;">
+              <i class="fa-solid fa-chart-pie"></i> Academic Overview Widgets
+            </div>
+          </div>
+          <div class="widgets-grid">
+            <div class="widget-card" onclick="switchPanel('timetable')">
+              <div class="widget-info">
+                <span class="label">Current Semester</span>
+                <h3>Sem-V/VII</h3>
+                <p>Academic Year 2026-27</p>
+              </div>
+              <div class="widget-icon"><i class="fa-solid fa-calendar"></i></div>
+            </div>
+            <div class="widget-card" onclick="switchPanel('subjects')">
+              <div class="widget-info">
+                <span class="label">Subjects Taught</span>
+                <h3>03</h3>
+                <p>Computer Engg Core</p>
+              </div>
+              <div class="widget-icon"><i class="fa-solid fa-book"></i></div>
+            </div>
+            <div class="widget-card" onclick="switchPanel('assignments')">
+              <div class="widget-info">
+                <span class="label">Assignments Due</span>
+                <h3 id="widgetAssignmentsDue">02</h3>
+                <p>Pending Submissions</p>
+              </div>
+              <div class="widget-icon"><i class="fa-solid fa-file-signature"></i></div>
+            </div>
+            <div class="widget-card" onclick="switchPanel('quiz')">
+              <div class="widget-info">
+                <span class="label">Upcoming Quiz</span>
+                <h3>Quiz 3</h3>
+                <p>Process Synchronization</p>
+              </div>
+              <div class="widget-icon"><i class="fa-solid fa-lightbulb"></i></div>
+            </div>
+            <div class="widget-card" onclick="switchPanel('progress')">
+              <div class="widget-info">
+                <span class="label">Syllabus Completion</span>
+                <h3 id="widgetSyllabusCompleted">66%</h3>
+                <div class="progress-bar-wrapper" style="height: 6px; margin: 4px 0 0 0;">
+                  <div class="progress-bar-inner" id="widgetSyllabusBar" style="width: 66%;"></div>
+                </div>
+              </div>
+              <div class="widget-icon"><i class="fa-solid fa-percent"></i></div>
+            </div>
+            <div class="widget-card" onclick="switchPanel('notifications-panel')">
+              <div class="widget-info">
+                <span class="label">Active Alerts</span>
+                <h3 id="widgetNotificationCount">3</h3>
+                <p>Click to view alerts</p>
+              </div>
+              <div class="widget-icon"><i class="fa-solid fa-bell"></i></div>
+            </div>
+            <div class="widget-card" onclick="switchPanel('notes')">
+              <div class="widget-info">
+                <span class="label">Latest Lecture Notes</span>
+                <h3>Unit 4</h3>
+                <p>Java Multi-Threading</p>
+              </div>
+              <div class="widget-icon"><i class="fa-solid fa-file-arrow-up"></i></div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <!-- Dynamic Announcements -->
+            <div class="card">
+              <div class="card-title">
+                <i class="fa-solid fa-bullhorn"></i> Professor's Latest Announcements
+              </div>
+              <div class="dropdown-list" style="max-height: none;" id="homeAnnouncementList">
+                <!-- announcements will be populated here -->
+              </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="card">
+              <div class="card-title">
+                <i class="fa-solid fa-bolt"></i> Quick Access Portals
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                <button class="btn btn-outline-primary" style="justify-content: center;" onclick="switchPanel('timetable')">
+                  <i class="fa-solid fa-clock"></i> Timetable
+                </button>
+                <button class="btn btn-outline-primary" style="justify-content: center;" onclick="switchPanel('notes')">
+                  <i class="fa-solid fa-file-lines"></i> Lecture Notes
+                </button>
+                <button class="btn btn-outline-primary" style="justify-content: center;" onclick="switchPanel('quiz')">
+                  <i class="fa-solid fa-brain"></i> Quiz Center
+                </button>
+                <button class="btn btn-outline-primary" style="justify-content: center;" onclick="switchPanel('slow-corner')">
+                  <i class="fa-solid fa-seedling"></i> Slow Learner Help
+                </button>
+                <button class="btn btn-outline-primary" style="justify-content: center;" onclick="switchPanel('advanced-corner')">
+                  <i class="fa-solid fa-rocket"></i> Research & Coding
+                </button>
+                <button class="btn btn-outline-primary" style="justify-content: center;" onclick="switchPanel('resources')">
+                  <i class="fa-solid fa-circle-info"></i> SPPU Circulars
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- SECTION 2: ABOUT THE PROFESSOR -->
+        <section class="panel" id="about">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-user-tie"></i> Mrs. Sunita Ramesh Patil</div>
+            <span class="academic-badge">Computer Engineering Department</span>
+          </div>
+
+          <div class="card" style="margin-bottom: 1.5rem;">
+            <div class="profile-grid">
+              <div class="profile-card-left">
+                <div class="profile-photo-wrapper">
+                  <img src="images/professor.jpg" alt="Mrs. Sunita Ramesh Patil">
+                </div>
+                <h3>Mrs. Sunita R. Patil</h3>
+                <p style="color: var(--text-muted); font-size: 0.85rem; font-weight: 600;">Assistant Professor</p>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">Dr. D. Y. Patil Institute of Technology, Pimpri</p>
+                
+                <ul class="contact-quick-list">
+                  <li><i class="fa-solid fa-envelope"></i> sunita.patil@dypvp.edu.in</li>
+                  <li><i class="fa-solid fa-envelope"></i> sunitapatil6@gmail.com</li>
+                  <li><i class="fa-solid fa-location-dot"></i> IT Block, Computer Engineering Dept</li>
+                  <li><i class="fa-solid fa-phone"></i> +91 9284480140 / +91 7875503877</li>
+                  <li><i class="fa-solid fa-clock"></i> Consultation: Mon/Wed 2-4 PM</li>
+                </ul>
+              </div>
+
+              <div class="profile-card-right">
+                <h4 style="margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; font-weight: 800; color: var(--primary-dark);">Academic Biography</h4>
+                <p style="font-size: 0.95rem; margin-bottom: 1.5rem; color: var(--text-secondary);">
+                  Mrs. Sunita Ramesh Patil is an Assistant Professor in the Department of Computer Engineering at Dr. D. Y. Patil Institute of Technology, Pimpri, Pune. She is currently pursuing her Ph.D. in Computer Science and Engineering from Amity University, Mumbai, focusing on intelligent systems and cognitive skill impairment modeling. She has completed her Master of Engineering from the University of Pune and has over 14 years of rich experience in engineering academics and academic administration. She is an author of SPPU course reference books, a syllabus revision coordinator, and has published over 15 patents and numerous research papers.
+                </p>
+
+                <div class="info-blocks-grid">
+                  <div>
+                    <h5 style="font-weight: 700; color: var(--primary-light); margin-bottom: 0.5rem;"><i class="fa-solid fa-graduation-cap"></i> Qualifications</h5>
+                    <ul style="padding-left: 1.2rem; font-size: 0.88rem; color: var(--text-secondary);">
+                      <li>Ph.D. in CSE (Pursuing, Amity University, Mumbai) - 9.3 SGPA</li>
+                      <li>Master of Engineering (University of Pune, May 2014) - 7.8 CGPA</li>
+                      <li>Bachelor of Engineering (University of Mumbai, May 2009) - 71%</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h5 style="font-weight: 700; color: var(--primary-light); margin-bottom: 0.5rem;"><i class="fa-solid fa-gears"></i> Technical Expertise</h5>
+                    <ul style="padding-left: 1.2rem; font-size: 0.88rem; color: var(--text-secondary);">
+                      <li>Data Analytics & Power BI</li>
+                      <li>Programming: HTML, C, C++, Java, PHP, R, Python</li>
+                      <li>Operating Systems: Windows & Linux</li>
+                    </ul>
+                  </div>
+                  <div style="margin-top: 1rem;">
+                    <h5 style="font-weight: 700; color: var(--primary-light); margin-bottom: 0.5rem;"><i class="fa-solid fa-book-bookmark"></i> Core Subjects Handled</h5>
+                    <ul style="padding-left: 1.2rem; font-size: 0.88rem; color: var(--text-secondary);">
+                      <li>Web Engineering and Technology</li>
+                      <li>Operating System & System Programming</li>
+                      <li>Core Java & Advanced Java Programming</li>
+                      <li>Machine Learning, Data Science & Big Data</li>
+                    </ul>
+                  </div>
+                  <div style="margin-top: 1rem;">
+                    <h5 style="font-weight: 700; color: var(--primary-light); margin-bottom: 0.5rem;"><i class="fa-solid fa-users"></i> Academic Activities</h5>
+                    <ul style="padding-left: 1.2rem; font-size: 0.88rem; color: var(--text-secondary);">
+                      <li>BE Project Coordinator (2021 - Present)</li>
+                      <li>Syllabus Revision Coordinator (BE-IT 2015 Pattern, SPPU)</li>
+                      <li>Journal Editor: Scienxt Journal of Neural Networks & Deep Learning</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 3: TIME TABLE -->
+        <section class="panel" id="timetable">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-calendar-days"></i> Weekly Timetable</div>
+            <span class="academic-badge">AY 2026-27 (Sem-I)</span>
+          </div>
+
+          <div class="card">
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              <i class="fa-solid fa-circle-info"></i> Direct link to student batch lectures and laboratory sessions with Mrs. Sunita R. Patil.
+            </p>
+            <div style="overflow-x: auto;">
+              <table class="timetable-table">
+                <thead>
+                  <tr>
+                    <th>Time / Day</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="font-weight: 700; font-size: 0.85rem;">09:00 AM - 10:00 AM</td>
+                    <td>
+                      <div class="timetable-slot">
+                        Web Engineering (WE)
+                        <span>BE-Comp Div A (Room 201)</span>
+                      </div>
+                    </td>
+                    <td>-</td>
+                    <td>
+                      <div class="timetable-slot">
+                        Web Engineering (WE)
+                        <span>BE-Comp Div A (Room 201)</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="timetable-slot">
+                        Operating System (OS)
+                        <span>TE-Comp Div B (Room 203)</span>
+                      </div>
+                    </td>
+                    <td>-</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 700; font-size: 0.85rem;">10:00 AM - 11:00 AM</td>
+                    <td>-</td>
+                    <td>
+                      <div class="timetable-slot">
+                        Core JAVA Programming
+                        <span>SE-Comp Div A (Room 202)</span>
+                      </div>
+                    </td>
+                    <td>-</td>
+                    <td>
+                      <div class="timetable-slot">
+                        Core JAVA Programming
+                        <span>SE-Comp Div A (Room 202)</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="timetable-slot">
+                        Operating System (OS)
+                        <span>TE-Comp Div B (Room 203)</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="6" class="timetable-break">SHORT BREAK (11:00 AM - 11:15 AM)</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 700; font-size: 0.85rem;">11:15 AM - 01:15 PM</td>
+                    <td>
+                      <div class="timetable-slot" style="background-color:#e0f2fe; border-left-color: var(--secondary);">
+                        Web Engineering Lab
+                        <span>Batch A1 (IT Lab-I)</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="timetable-slot" style="background-color:#e0f2fe; border-left-color: var(--secondary);">
+                        Java Programming Lab
+                        <span>Batch S2 (IT Lab-II)</span>
+                      </div>
+                    </td>
+                    <td>-</td>
+                    <td>
+                      <div class="timetable-slot" style="background-color:#e0f2fe; border-left-color: var(--secondary);">
+                        Web Engineering Lab
+                        <span>Batch A2 (IT Lab-I)</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="timetable-slot" style="background-color:#e0f2fe; border-left-color: var(--secondary);">
+                        OS & System Programming Lab
+                        <span>Batch T1 (OS Lab)</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="6" class="timetable-break">LUNCH BREAK (01:15 PM - 02:00 PM)</td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 700; font-size: 0.85rem;">02:00 PM - 03:00 PM</td>
+                    <td>
+                      <div class="timetable-slot" style="background-color: #fee2e2; border-left-color: var(--danger);">
+                        Student Consultation
+                        <span>Office Block</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="timetable-slot">
+                        Operating System (OS)
+                        <span>TE-Comp Div B (Room 203)</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="timetable-slot" style="background-color: #fee2e2; border-left-color: var(--danger);">
+                        Student Consultation
+                        <span>Office Block</span>
+                      </div>
+                    </td>
+                    <td>-</td>
+                    <td>
+                      <div class="timetable-slot">
+                        Core JAVA Programming
+                        <span>SE-Comp Div A (Room 202)</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: 700; font-size: 0.85rem;">03:00 PM - 05:00 PM</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>
+                      <div class="timetable-slot" style="background-color:#ecfdf5; border-left-color: var(--success);">
+                        Remedial Sessions
+                        <span>Slow Learners (Room 202)</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="timetable-slot" style="background-color:#ecfdf5; border-left-color: var(--success);">
+                        BE Project Review
+                        <span>BE Coordination Desk</span>
+                      </div>
+                    </td>
+                    <td>-</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 4: SUBJECTS TAUGHT -->
+        <section class="panel" id="subjects">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-book-open"></i> Subjects Taught (Semester Details)</div>
+            <span class="academic-badge">3 Featured Courses</span>
+          </div>
+
+          <!-- Web Engineering Accordion -->
+          <div class="accordion-item" id="subject-we">
+            <div class="accordion-header" onclick="toggleAccordion('subject-we')">
+              <span>Web Engineering and Technology (WE)</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="accordion-content">
+              <div class="subject-details-meta">
+                <span class="meta-pill">Code: WE-401</span>
+                <span class="meta-pill">Semester: VII</span>
+                <span class="meta-pill">Credits: 4</span>
+                <span class="meta-pill">Lectures: 3 hrs/week</span>
+              </div>
+              <h4 style="font-weight:700; margin-bottom: 0.5rem; color: var(--primary);">Course Objectives:</h4>
+              <p style="font-size:0.9rem; margin-bottom:1rem; color: var(--text-secondary);">
+                To introduce web engineering methodologies, responsive HTML5/CSS3 page formatting, client-side dynamic scripting (JavaScript/DOM), backend integrations (PHP/Java Servlets), and database systems connectivity.
+              </p>
+              <h4 style="font-weight:700; margin-bottom: 0.5rem; color: var(--primary);">Course Outcomes (COs):</h4>
+              <ul style="padding-left:1.5rem; font-size:0.88rem; margin-bottom:1rem; color: var(--text-secondary);">
+                <li>CO1: Formulate structured web documents using HTML5 semantic layouts.</li>
+                <li>CO2: Design responsive styles using media queries and CSS grid structures.</li>
+                <li>CO3: Apply JavaScript to implement interactive client validation and DOM modifications.</li>
+                <li>CO4: Build database-backed web architectures using server-side logic (PHP/Java).</li>
+              </ul>
+              <h4 style="font-weight:700; margin-bottom: 0.5rem; color: var(--primary);">Syllabus Overview:</h4>
+              <ul style="padding-left:1.5rem; font-size:0.88rem; margin-bottom:1rem; color: var(--text-secondary);">
+                <li>Unit I: Web Engineering Principles and Client-Server Architectures</li>
+                <li>Unit II: HyperText Markup Language 5 (HTML5) & Cascading Style Sheets (CSS3)</li>
+                <li>Unit III: Client-Side Interactivity: JavaScript Syntax, Arrays, Functions, and DOM</li>
+                <li>Unit IV: Dynamic Server-Side Web Content Generation using PHP</li>
+                <li>Unit V: Database Connectivity (MySQL/JDBC) & Session Management</li>
+                <li>Unit VI: Web Services (RESTful APIs), Security, XML, and JSON Protocols</li>
+              </ul>
+              <h4 style="font-weight:700; margin-bottom: 0.5rem; color: var(--primary);">Recommended Reference Books:</h4>
+              <ul style="padding-left:1.5rem; font-size:0.88rem; color: var(--text-secondary);">
+                <li><strong>Textbook:</strong> Kogent Learning Solutions Inc., "Web Technologies: HTML, JavaScript, PHP, Java, JSP, XML, AJAX, Black Book", Dreamtech Press.</li>
+                <li><strong>Reference:</strong> Thomas Powell, "Web Design: The Complete Reference", Tata McGraw Hill.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Operating System Accordion -->
+          <div class="accordion-item" id="subject-os">
+            <div class="accordion-header" onclick="toggleAccordion('subject-os')">
+              <span>Operating System (OS)</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="accordion-content">
+              <div class="subject-details-meta">
+                <span class="meta-pill">Code: OS-302</span>
+                <span class="meta-pill">Semester: V</span>
+                <span class="meta-pill">Credits: 3</span>
+                <span class="meta-pill">Lectures: 3 hrs/week</span>
+              </div>
+              <h4 style="font-weight:700; margin-bottom: 0.5rem; color: var(--primary);">Course Objectives:</h4>
+              <p style="font-size:0.9rem; margin-bottom:1rem; color: var(--text-secondary);">
+                To discuss process structures, CPU scheduling algorithms, inter-process synchronization semaphores, deadlock conditions, virtual memory structures, and file system layouts.
+              </p>
+              <h4 style="font-weight:700; margin-bottom: 0.5rem; color: var(--primary);">Course Outcomes (COs):</h4>
+              <ul style="padding-left:1.5rem; font-size:0.88rem; margin-bottom:1rem; color: var(--text-secondary);">
+                <li>CO1: Evaluate quantitative computer OS performances via scheduler simulations.</li>
+                <li>CO2: Resolve race issues inside concurrent threads using semaphores.</li>
+                <li>CO3: Analyze page replacement policy behaviors on virtual memory buffers.</li>
+              </ul>
+              <h4 style="font-weight:700; margin-bottom: 0.5rem; color: var(--primary);">Syllabus Overview:</h4>
+              <ul style="padding-left:1.5rem; font-size:0.88rem; margin-bottom:1rem; color: var(--text-secondary);">
+                <li>Unit I: Overview of OS Structures, Kernel Types, and System Calls</li>
+                <li>Unit II: Process Management & CPU Scheduling (FCFS, SJF, Round Robin)</li>
+                <li>Unit III: Process Synchronization, Critical Section Problem, and Semaphores</li>
+                <li>Unit IV: Deadlocks Detection, Prevention, and Banker's Avoidance Algorithm</li>
+                <li>Unit V: Memory Management, Paging, Segmentation, and Virtual Memory Page Replacements</li>
+                <li>Unit VI: Disk Storage Scheduling and File Directories Layouts</li>
+              </ul>
+              <h4 style="font-weight:700; margin-bottom: 0.5rem; color: var(--primary);">Textbooks & References:</h4>
+              <ul style="padding-left:1.5rem; font-size:0.88rem; color: var(--text-secondary);">
+                <li><strong>Textbook:</strong> Silberschatz, Galvin, and Gagne, "Operating System Concepts", Wiley.</li>
+                <li><strong>Reference:</strong> William Stallings, "Operating Systems: Internals and Design Principles", Pearson.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Core Java Accordion -->
+          <div class="accordion-item" id="subject-java">
+            <div class="accordion-header" onclick="toggleAccordion('subject-java')">
+              <span>Core JAVA Programming</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="accordion-content">
+              <div class="subject-details-meta">
+                <span class="meta-pill">Code: JAVA-203</span>
+                <span class="meta-pill">Semester: III</span>
+                <span class="meta-pill">Credits: 4</span>
+                <span class="meta-pill">Lectures: 3 hrs/week</span>
+              </div>
+              <h4 style="font-weight:700; margin-bottom: 0.5rem; color: var(--primary);">Course Objectives:</h4>
+              <p style="font-size:0.9rem; margin-bottom:1rem; color: var(--text-secondary);">
+                To learn object-oriented constructs, inheritance systems, multi-threaded pipelines, exception controls, Java Collections framework, and socket programming.
+              </p>
+              <h4 style="font-weight:700; margin-bottom: 0.5rem; color: var(--primary);">Course Outcomes (COs):</h4>
+              <ul style="padding-left:1.5rem; font-size:0.88rem; margin-bottom:1rem; color: var(--text-secondary);">
+                <li>CO1: Structure Java class frameworks utilizing encapsulation and polymorphism.</li>
+                <li>CO2: Deploy safe concurrent multi-threaded execution codes.</li>
+                <li>CO3: Integrate client socket connections to transfer serialized data streams.</li>
+              </ul>
+              <h4 style="font-weight:700; margin-bottom: 0.5rem; color: var(--primary);">Syllabus:</h4>
+              <ul style="padding-left:1.5rem; font-size:0.88rem; margin-bottom:1rem; color: var(--text-secondary);">
+                <li>Unit I: Fundamentals of OOP, Classes, Objects, and Access Modifiers</li>
+                <li>Unit II: Inheritance, Interfaces, Abstract Classes, and Packages</li>
+                <li>Unit III: Exception Handling and Custom Exceptions Framework</li>
+                <li>Unit IV: Multi-Threading, Thread Lifecycle, and Concurrent Synchronization</li>
+                <li>Unit V: Collections Framework (ArrayList, HashMap, Sets) & File I/O</li>
+                <li>Unit VI: Java Socket Networking & Database Connectivity (JDBC)</li>
+              </ul>
+              <h4 style="font-weight:700; margin-bottom: 0.5rem; color: var(--primary);">Textbooks:</h4>
+              <ul style="padding-left:1.5rem; font-size:0.88rem; color: var(--text-secondary);">
+                <li><strong>Textbook:</strong> Herbert Schildt, "Java: The Complete Reference", Oracle Press.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 5: LECTURE NOTES -->
+        <section class="panel" id="notes">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-file-pdf"></i> Academic Lecture Notes & Resources</div>
+            <span class="academic-badge">Core Courses</span>
+          </div>
+
+          <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchNotesTab('cc-notes')">Web Engineering</button>
+            <button class="tab-btn" onclick="switchNotesTab('aca-notes')">Operating System</button>
+            <button class="tab-btn" onclick="switchNotesTab('ds-notes')">Core Java</button>
+          </div>
+
+          <!-- Notes Container for Web Engineering -->
+          <div class="notes-tab-content active" id="cc-notes">
+            <div class="grid-3">
+              <div class="note-card">
+                <div class="note-icon-box pdf"><i class="fa-solid fa-file-pdf"></i></div>
+                <div class="note-details">
+                  <h4>Unit 1: HTTP Client-Server Model</h4>
+                  <p>Study sheet explaining RESTful cycles, HTTP headers, request types, and response status codes.</p>
+                  <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-download"></i> PDF Notes</a>
+                </div>
+              </div>
+              <div class="note-card">
+                <div class="note-icon-box ppt"><i class="fa-solid fa-file-powerpoint"></i></div>
+                <div class="note-details">
+                  <h4>Unit 2: Responsive Grid & Flexbox</h4>
+                  <p>Slide deck detailing CSS media queries, absolute/relative positions, and responsive layout designs.</p>
+                  <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-download"></i> PPT Slide</a>
+                </div>
+              </div>
+              <div class="note-card">
+                <div class="note-icon-box manual"><i class="fa-solid fa-flask"></i></div>
+                <div class="note-details">
+                  <h4>Lab Manual: JS DOM Manipulation</h4>
+                  <p>Lab guidelines for dynamic item additions, element creation, and form validations in JavaScript.</p>
+                  <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-download"></i> Lab Guide</a>
+                </div>
+              </div>
+              <div class="note-card">
+                <div class="note-icon-box video"><i class="fa-solid fa-video"></i></div>
+                <div class="note-details">
+                  <h4>PHP & MySQL Session Setup</h4>
+                  <p>Recorded video session of setting up Apache server, creating PHP cookies, and database logins.</p>
+                  <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-play"></i> Watch Video</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notes Container for Operating System -->
+          <div class="notes-tab-content" id="aca-notes" style="display: none;">
+            <div class="grid-3">
+              <div class="note-card">
+                <div class="note-icon-box pdf"><i class="fa-solid fa-file-pdf"></i></div>
+                <div class="note-details">
+                  <h4>CPU Scheduler Calculations</h4>
+                  <p>Step-by-step example calculating average turnaround time for FCFS, SJF, and Round Robin.</p>
+                  <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-download"></i> PDF Notes</a>
+                </div>
+              </div>
+              <div class="note-card">
+                <div class="note-icon-box ppt"><i class="fa-solid fa-file-powerpoint"></i></div>
+                <div class="note-details">
+                  <h4>Unit 3: Process Synchronization</h4>
+                  <p>Critical section solutions, mutex locks, and semaphores concurrency slides.</p>
+                  <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-download"></i> PPT Slide</a>
+                </div>
+              </div>
+              <div class="note-card">
+                <div class="note-icon-box video"><i class="fa-solid fa-video"></i></div>
+                <div class="note-details">
+                  <h4>Banker's Deadlock Algorithm</h4>
+                  <p>Video walk-through of allocation matrices, need grids, and safe sequence solving.</p>
+                  <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-play"></i> Watch Video</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notes Container for Core Java -->
+          <div class="notes-tab-content" id="ds-notes" style="display: none;">
+            <div class="grid-3">
+              <div class="note-card">
+                <div class="note-icon-box pdf"><i class="fa-solid fa-file-pdf"></i></div>
+                <div class="note-details">
+                  <h4>Inheritance & Interfaces</h4>
+                  <p>Conceptual guides describing class abstract methods, polymorphic overrides, and dynamic binding.</p>
+                  <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-download"></i> PDF Notes</a>
+                </div>
+              </div>
+              <div class="note-card">
+                <div class="note-icon-box manual"><i class="fa-solid fa-flask"></i></div>
+                <div class="note-details">
+                  <h4>Lab Manual: Thread Synchronization</h4>
+                  <p>Code samples mapping synchronized methods, wait/notify routines, and thread safety blockers.</p>
+                  <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-download"></i> Lab Guide</a>
+                </div>
+              </div>
+              <div class="note-card">
+                <div class="note-icon-box video"><i class="fa-solid fa-video"></i></div>
+                <div class="note-details">
+                  <h4>Java Collections Walkthrough</h4>
+                  <p>Video visualization explaining List, Set, and Map differences and efficiency metrics.</p>
+                  <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-play"></i> Watch Video</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 6: QUIZ CENTER -->
+        <section class="panel" id="quiz">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-lightbulb"></i> Quiz Center & MCQ Practice</div>
+            <span class="academic-badge">Interactive Engine</span>
+          </div>
+
+          <div class="grid-2">
+            <!-- MCQ Practice Widget -->
+            <div class="card">
+              <div class="card-title"><i class="fa-solid fa-circle-question"></i> Instant MCQ Self-Check</div>
+              <div class="quiz-widget" id="mcqWidgetArea">
+                <p style="font-weight: 700; margin-bottom: 1rem;" id="quizQuestionText">Q1: Which CPU scheduling algorithm can lead to starvation for long processes?</p>
+                <div class="mcq-option" onclick="checkAnswer(this, false, 'FCFS executes in arrival order, guaranteeing execution eventually.')">
+                  <span class="badge" style="background:var(--primary-dark); color:#fff; border-radius:50%; width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center;">A</span>
+                  <span>First Come First Served (FCFS)</span>
+                </div>
+                <div class="mcq-option" onclick="checkAnswer(this, true, 'Correct! Shortest Job First (SJF) keeps scheduling shorter tasks, starving longer ones.')">
+                  <span class="badge" style="background:var(--primary-dark); color:#fff; border-radius:50%; width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center;">B</span>
+                  <span>Shortest Job First (SJF)</span>
+                </div>
+                <div class="mcq-option" onclick="checkAnswer(this, false, 'Round Robin cycles time slices, ensuring all tasks execute.')">
+                  <span class="badge" style="background:var(--primary-dark); color:#fff; border-radius:50%; width:20px; height:20px; display:inline-flex; align-items:center; justify-content:center;">C</span>
+                  <span>Round Robin</span>
+                </div>
+                
+                <div class="quiz-explanation" id="quizExplanationBox">
+                  <!-- Explanation text loads here -->
+                </div>
+                
+                <div style="margin-top:1.5rem; display:flex; justify-content:space-between; align-items:center;">
+                  <button class="btn btn-outline-primary btn-sm" onclick="resetQuiz()">Reset Question</button>
+                  <button class="btn btn-primary btn-sm" onclick="nextQuizQuestion()">Next Question <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- External Assessment Forms & Archives -->
+            <div class="card">
+              <div class="card-title"><i class="fa-solid fa-link"></i> Semester Exams & Practice Forms</div>
+              <ul style="list-style:none; margin-top:1rem;">
+                <li style="padding:0.75rem; border: 1px solid var(--border-color); border-radius:var(--radius-md); margin-bottom:0.75rem; display:flex; justify-content:space-between; align-items:center;">
+                  <div>
+                    <h5 style="font-weight:700;">Google Form: Web Engineering Unit-I Test</h5>
+                    <span style="font-size:0.8rem; color:var(--text-muted);">Deadline: Opened till Sunday</span>
+                  </div>
+                  <a href="https://forms.google.com" target="_blank" class="btn btn-sm btn-primary">Open Quiz <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </li>
+                <li style="padding:0.75rem; border: 1px solid var(--border-color); border-radius:var(--radius-md); margin-bottom:0.75rem; display:flex; justify-content:space-between; align-items:center;">
+                  <div>
+                    <h5 style="font-weight:700;">Google Form: OS CPU Scheduling Quiz</h5>
+                    <span style="font-size:0.8rem; color:var(--text-muted);">Self-assessment practice sheet</span>
+                  </div>
+                  <a href="https://forms.google.com" target="_blank" class="btn btn-sm btn-primary">Open Quiz <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </li>
+              </ul>
+              
+              <h4 style="font-weight:800; margin-top:1.5rem; margin-bottom:0.5rem; font-size:1rem; border-bottom:1px solid var(--border-color); padding-bottom:0.5rem;">Previous Quiz Archive</h4>
+              <div style="display:flex; flex-direction:column; gap:0.5rem;">
+                <a href="#" class="note-card" style="padding: 0.75rem;">
+                  <i class="fa-solid fa-file-zipper" style="color:var(--warning); font-size:1.2rem;"></i>
+                  <span style="font-size:0.85rem; font-weight:600; color:var(--text-secondary);">Unit Test-I Archive papers (2024, 2025) - [Download PDF]</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 7: ASSIGNMENT PORTAL -->
+        <section class="panel" id="assignments">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-file-signature"></i> Student Assignment Portal</div>
+            <span class="academic-badge">Active Submissions</span>
+          </div>
+
+          <div class="grid-2">
+            <!-- Assignment List & Status -->
+            <div class="card" style="grid-column: span 2;">
+              <div class="card-title"><i class="fa-solid fa-list-check"></i> Outlined Assignments</div>
+              <div style="overflow-x: auto;">
+                <table class="assignment-table">
+                  <thead>
+                    <tr>
+                      <th>Assignment Description</th>
+                      <th>Subject</th>
+                      <th>Due Date</th>
+                      <th>Max Marks</th>
+                      <th>Status</th>
+                      <th>Faculty Remarks / Grade</th>
+                    </tr>
+                  </thead>
+                  <tbody id="assignmentTableBody">
+                    <tr>
+                      <td style="font-weight:700;">Assignment 1: Responsive Layout using HTML5 Grid & Media Queries</td>
+                      <td>Web Engineering (WE)</td>
+                      <td>15-July-2026</td>
+                      <td>20</td>
+                      <td><span class="badge-status open" id="status-ass-1">Open</span></td>
+                      <td id="grade-ass-1">Pending Submission</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:700;">Assignment 2: CPU Scheduling Algorithms Simulation in C/Java</td>
+                      <td>Operating System (OS)</td>
+                      <td>25-July-2026</td>
+                      <td>20</td>
+                      <td><span class="badge-status open" id="status-ass-2">Open</span></td>
+                      <td id="grade-ass-2">Pending Submission</td>
+                    </tr>
+                    <tr>
+                      <td style="font-weight:700;">Assignment 0: Java Programming Environment & JDK Setup</td>
+                      <td>Core Java</td>
+                      <td>01-July-2026</td>
+                      <td>10</td>
+                      <td><span class="badge-status closed">Closed</span></td>
+                      <td>Grade: 10/10 (Remarks: Excellent compiler configuration)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Upload Zone -->
+            <div class="card">
+              <div class="card-title"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Assignment File</div>
+              
+              <div style="margin-bottom: 1rem;">
+                <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.4rem; color:var(--text-secondary);">Select Target Assignment:</label>
+                <select id="uploadAssignmentSelect" style="width:100%; padding:0.6rem; border:1px solid var(--border-color); border-radius:var(--radius-md);">
+                  <option value="ass-1">Assignment 1: HTML5 Responsive Layout</option>
+                  <option value="ass-2">Assignment 2: CPU Scheduler Code</option>
+                </select>
+              </div>
+
+              <div class="drag-drop-zone" onclick="triggerFileSelect()">
+                <i class="fa-solid fa-file-arrow-up"></i>
+                <p>Drag and Drop files here</p>
+                <span>or click to browse from device (PDF, ZIP, Max 10MB)</span>
+                <input type="file" id="assignmentFileInput" style="display: none;" onchange="handleFileSelect(event)">
+              </div>
+              
+              <div id="selectedFileInfo" style="display:none; padding:0.75rem; border:1px solid var(--border-color); border-radius:var(--radius-md); background:var(--bg-main); margin-bottom:1rem; align-items:center; justify-content:space-between;">
+                <span id="selectedFileName" style="font-size:0.85rem; font-weight:600;">document.pdf</span>
+                <button class="btn-sm btn-outline-primary" style="padding:2px 8px;" onclick="cancelFileSelection()"><i class="fa-solid fa-trash"></i></button>
+              </div>
+
+              <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="submitAssignmentMock()">Submit Assignment Document</button>
+            </div>
+
+            <!-- Submission History -->
+            <div class="card">
+              <div class="card-title"><i class="fa-solid fa-clock-rotate-left"></i> Submission Logs History</div>
+              <ul style="list-style:none; margin-top:0.5rem;" id="submissionHistoryList">
+                <li style="padding:0.6rem; border-bottom:1px solid var(--border-color); font-size:0.8rem; color:var(--text-secondary); display:flex; justify-content:space-between;">
+                  <span>Assignment 0: JDK Setup</span>
+                  <span>Submitted on: 30-June-2026</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 8: COURSE PROGRESS TRACKER -->
+        <section class="panel" id="progress">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-chart-line"></i> Course Progress Tracker (Interactive)</div>
+            <span class="academic-badge">Syllabus Checklists</span>
+          </div>
+
+          <div class="grid-2">
+            <!-- Interactive syllabus progress checklist -->
+            <div class="card" style="grid-column: span 2;">
+              <div class="card-title"><i class="fa-solid fa-bars-progress"></i> Syllabus Units Checkoff</div>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1.5rem;">
+                <i class="fa-solid fa-info-circle"></i> Check off the units as you finish learning them. The completion progress bar will recalculate automatically in real-time.
+              </p>
+              
+              <h4 style="font-weight:700; margin-bottom:0.75rem; font-size:0.95rem; color:var(--primary);">Web Engineering (WE) Syllabus Units</h4>
+              <ul class="unit-tracker-list">
+                <li class="unit-tracker-item">
+                  <div class="unit-tracker-left">
+                    <input type="checkbox" id="unit-cc-1" checked onchange="updateSyllabusProgress()">
+                    <span class="unit-title">Unit I: Web Engineering Principles and Architectures</span>
+                  </div>
+                  <span class="unit-status completed" id="status-unit-cc-1">Completed</span>
+                </li>
+                <li class="unit-tracker-item">
+                  <div class="unit-tracker-left">
+                    <input type="checkbox" id="unit-cc-2" checked onchange="updateSyllabusProgress()">
+                    <span class="unit-title">Unit II: HTML5 Web Formats & Responsive CSS3 Grid/Flexbox Layouts</span>
+                  </div>
+                  <span class="unit-status completed" id="status-unit-cc-2">Completed</span>
+                </li>
+                <li class="unit-tracker-item">
+                  <div class="unit-tracker-left">
+                    <input type="checkbox" id="unit-cc-3" checked onchange="updateSyllabusProgress()">
+                    <span class="unit-title">Unit III: Client-Side Interactivity: JavaScript Dynamic DOM Functions</span>
+                  </div>
+                  <span class="unit-status completed" id="status-unit-cc-3">Completed</span>
+                </li>
+                <li class="unit-tracker-item">
+                  <div class="unit-tracker-left">
+                    <input type="checkbox" id="unit-cc-4" checked onchange="updateSyllabusProgress()">
+                    <span class="unit-title">Unit IV: Dynamic Server-Side Web Content Generation using PHP</span>
+                  </div>
+                  <span class="unit-status completed" id="status-unit-cc-4">Completed</span>
+                </li>
+                <li class="unit-tracker-item">
+                  <div class="unit-tracker-left">
+                    <input type="checkbox" id="unit-cc-5" onchange="updateSyllabusProgress()">
+                    <span class="unit-title">Unit V: MySQL Database Connections, JDBC, and Sessions Security</span>
+                  </div>
+                  <span class="unit-status pending" id="status-unit-cc-5">Pending Review</span>
+                </li>
+                <li class="unit-tracker-item">
+                  <div class="unit-tracker-left">
+                    <input type="checkbox" id="unit-cc-6" onchange="updateSyllabusProgress()">
+                    <span class="unit-title">Unit VI: Web Services (RESTful APIs), AJAX, and XML/JSON</span>
+                  </div>
+                  <span class="unit-status pending" id="status-unit-cc-6">Pending Review</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Statistics and Upcoming Topics -->
+            <div class="card">
+              <div class="card-title"><i class="fa-solid fa-list"></i> Remaining Units</div>
+              <ul style="padding-left: 1.2rem; font-size: 0.9rem; color:var(--text-secondary);">
+                <li>Database connection pooling & SQL injection prevention (Unit 5)</li>
+                <li>Creating RESTful endpoints inside backend controllers (Unit 6)</li>
+                <li>Parsing XML and JSON payloads inside AJAX client scripts (Unit 6)</li>
+              </ul>
+            </div>
+            
+            <div class="card">
+              <div class="card-title"><i class="fa-solid fa-arrow-trend-up"></i> Upcoming Lectures Topic List</div>
+              <ul style="padding-left: 1.2rem; font-size: 0.9rem; color:var(--text-secondary);">
+                <li>AJAX asynchronous request structures and ready-states</li>
+                <li>OS Process synchronization: Classical problems (Dining Philosophers)</li>
+                <li>Java JDBC Statements vs PreparedStatements performance</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 9: DISCUSSION FORUM -->
+        <section class="panel" id="forum">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-comments"></i> Student Discussion Forum</div>
+            <span class="academic-badge">In-Memory Interaction</span>
+          </div>
+
+          <div class="grid-2">
+            <!-- Ask Question area -->
+            <div class="card" style="grid-column: span 2;">
+              <div class="card-title"><i class="fa-solid fa-pen-nib"></i> Post a New Question</div>
+              <div class="forum-form">
+                <input type="text" id="forumTopicInput" placeholder="Topic Heading (e.g., Thread race condition deadlock)">
+                <textarea id="forumQuestionInput" rows="3" placeholder="Explain your query in detail..."></textarea>
+                <button class="btn btn-primary" onclick="postForumQuestion()"><i class="fa-solid fa-paper-plane"></i> Submit Post</button>
+              </div>
+            </div>
+
+            <!-- Active Threads -->
+            <div class="card" style="grid-column: span 2;">
+              <div class="card-title"><i class="fa-solid fa-users"></i> Discussion Threads</div>
+              
+              <div class="forum-thread" id="forumThreadsContainer">
+                <!-- Posts populated here by script.js -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 10: NOTIFICATIONS PANEL -->
+        <section class="panel" id="notifications-panel">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-bell"></i> Official Notifications & Deadlines</div>
+            <span class="academic-badge">Academic Alerts</span>
+          </div>
+
+          <div class="card">
+            <div class="card-title"><i class="fa-solid fa-list"></i> Latest Notice Board Updates</div>
+            <div style="display:flex; flex-direction:column; gap:1rem; margin-top:1rem;" id="fullNotificationPageList">
+              <!-- Dynamically populated from JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 11: PREVIOUS QUESTION PAPERS -->
+        <section class="panel" id="papers">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-folder-open"></i> Previous Question Papers Archive</div>
+            <span class="academic-badge">SPPU Question Bank</span>
+          </div>
+
+          <div class="card">
+            <div class="tab-nav">
+              <button class="tab-btn active" onclick="switchPapersTab('mid-sem-papers')">Mid Semester Exam</button>
+              <button class="tab-btn" onclick="switchPapersTab('end-sem-papers')">End Semester Exam</button>
+              <button class="tab-btn" onclick="switchPapersTab('practical-papers')">Practical Examinations</button>
+            </div>
+
+            <!-- Mid Sem papers -->
+            <div class="papers-tab-content active" id="mid-sem-papers">
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">In-semester assessments papers (30 Marks syllabus core):</p>
+              <div class="grid-3">
+                <a href="#" class="note-card">
+                  <i class="fa-solid fa-file-pdf" style="color:var(--danger); font-size:1.5rem;"></i>
+                  <div class="note-details">
+                    <h5 style="font-weight:700;">WE Mid Sem 2025</h5>
+                    <p>Syllabus Units 1-2. PDF format.</p>
+                  </div>
+                </a>
+                <a href="#" class="note-card">
+                  <i class="fa-solid fa-file-pdf" style="color:var(--danger); font-size:1.5rem;"></i>
+                  <div class="note-details">
+                    <h5 style="font-weight:700;">OS Mid Sem 2025</h5>
+                    <p>Syllabus Units 1-3. PDF format.</p>
+                  </div>
+                </a>
+                <a href="#" class="note-card">
+                  <i class="fa-solid fa-file-pdf" style="color:var(--danger); font-size:1.5rem;"></i>
+                  <div class="note-details">
+                    <h5 style="font-weight:700;">Java Mid Sem 2024</h5>
+                    <p>Syllabus Units 1-2. PDF format.</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- End Sem papers -->
+            <div class="papers-tab-content" id="end-sem-papers" style="display:none;">
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">End-semester examination papers (70 Marks syllabus core):</p>
+              <div class="grid-3">
+                <a href="#" class="note-card">
+                  <i class="fa-solid fa-file-pdf" style="color:var(--danger); font-size:1.5rem;"></i>
+                  <div class="note-details">
+                    <h5 style="font-weight:700;">WE End Sem Nov 2025</h5>
+                    <p>Entire Syllabus. PDF format.</p>
+                  </div>
+                </a>
+                <a href="#" class="note-card">
+                  <i class="fa-solid fa-file-pdf" style="color:var(--danger); font-size:1.5rem;"></i>
+                  <div class="note-details">
+                    <h5 style="font-weight:700;">OS End Sem Nov 2025</h5>
+                    <p>Entire Syllabus. PDF format.</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- Practical papers -->
+            <div class="papers-tab-content" id="practical-papers" style="display:none;">
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">External practical viva guidelines and previous problem slips:</p>
+              <div class="grid-3">
+                <a href="#" class="note-card">
+                  <i class="fa-solid fa-file-word" style="color:var(--primary-light); font-size:1.5rem;"></i>
+                  <div class="note-details">
+                    <h5 style="font-weight:700;">WE Practical Slips 2025</h5>
+                    <p>Docket list. Docx format.</p>
+                  </div>
+                </a>
+                <a href="#" class="note-card">
+                  <i class="fa-solid fa-file-word" style="color:var(--primary-light); font-size:1.5rem;"></i>
+                  <div class="note-details">
+                    <h5 style="font-weight:700;">OS Oral Viva Questions</h5>
+                    <p>Compilation guide. Docx format.</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SECTION 12: REMEDIAL CLASSES -->
+        <section class="panel" id="remedial">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-user-clock"></i> Remedial Classes & Extra Support</div>
+            <span class="academic-badge">Student Care Programs</span>
+          </div>
+
+          <div class="grid-2">
+            <!-- Remedial Schedule and Topics -->
+            <div class="card">
+              <div class="card-title"><i class="fa-solid fa-calendar-check"></i> Remedial Class Schedule</div>
+              <ul style="list-style:none; margin-top:1rem;">
+                <li style="padding:0.75rem; border-bottom:1px solid var(--border-color); font-size:0.88rem;">
+                  <strong>Web Design Responsive Styles:</strong> every Wednesday, 3:00 PM - 4:00 PM (Room 202).
+                </li>
+                <li style="padding:0.75rem; border-bottom:1px solid var(--border-color); font-size:0.88rem;">
+                  <strong>CPU Scheduling Numerical Solving:</strong> every Thursday, 3:00 PM - 4:30 PM (Room 202).
+                </li>
+              </ul>
+              
+              <h4 style="font-weight:800; margin-top:1.5rem; margin-bottom:0.5rem; font-size:0.95rem;">Target Remedial Topics</h4>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:0.75rem;">Selected units causing complex problem solving difficulties during classes:</p>
+              <ul style="padding-left:1.2rem; font-size:0.88rem; color:var(--text-secondary);">
+                <li>CPU scheduling Gantt chart tracing (OS)</li>
+                <li>Dynamic layout scaling with flexbox (WE)</li>
+                <li>Java interfaces and multiple inheritance (Java)</li>
+              </ul>
+            </div>
+
+            <!-- Attendance check and student list mock -->
+            <div class="card">
+              <div class="card-title"><i class="fa-solid fa-users"></i> Targeted Student List & Attendance Status</div>
+              <div style="overflow-x: auto; margin-top:1rem;">
+                <table class="timetable-table" style="font-size:0.8rem; margin-top:0;">
+                  <thead>
+                    <tr>
+                      <th>Roll No</th>
+                      <th>Student Name</th>
+                      <th>Attendance Status</th>
+                      <th>Work Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>4017015</td>
+                      <td>Aditya Kulkarni</td>
+                      <td><span class="badge-status open">Present</span></td>
+                      <td>Revision Quiz Finished</td>
+                    </tr>
+                    <tr>
+                      <td>4017028</td>
+                      <td>Neha Deshpande</td>
+                      <td><span class="badge-status open">Present</span></td>
+                      <td>Revision Quiz Finished</td>
+                    </tr>
+                    <tr>
+                      <td>4017042</td>
+                      <td>Rohit Shinde</td>
+                      <td><span class="badge-status closed">Absent</span></td>
+                      <td>Need to submit Worksheet 1</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div style="margin-top:1rem;">
+                <h5 style="font-weight:700; font-size:0.85rem;">Extra Practice Worksheets:</h5>
+                <a href="#" class="note-card" style="padding:0.5rem; margin-top:0.5rem;">
+                  <i class="fa-solid fa-file-pdf" style="color:var(--danger); font-size:1.1rem;"></i>
+                  <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Solved CPU Scheduler Numericals.pdf [Download]</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 13: SLOW LEARNER CORNER -->
+        <section class="panel" id="slow-corner">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-seedling"></i> Slow Learner Corner</div>
+            <span class="academic-badge">Targeted Simplified Material</span>
+          </div>
+
+          <div class="grid-2">
+            <!-- Simplified notes and revision slides -->
+            <div class="card">
+              <div class="card-title"><i class="fa-solid fa-file-lines"></i> Simplified Core Notes</div>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">Easy summaries built to master foundational engineering topics without overwhelming detail:</p>
+              
+              <div style="display:flex; flex-direction:column; gap:0.75rem;">
+                <a href="#" class="note-card" style="padding:0.75rem;">
+                  <i class="fa-solid fa-file-pdf" style="color:var(--danger);"></i>
+                  <div class="note-details">
+                    <h5 style="font-weight:700; font-size:0.85rem;">Easy Notes: OS Process States</h5>
+                    <p>Simplified states diagrams & short definitions. PDF.</p>
+                  </div>
+                </a>
+                <a href="#" class="note-card" style="padding:0.75rem;">
+                  <i class="fa-solid fa-file-powerpoint" style="color:var(--warning);"></i>
+                  <div class="note-details">
+                    <h5 style="font-weight:700; font-size:0.85rem;">Simplified Slide: Java OOP Classes</h5>
+                    <p>Visual mapping of class objects and inheritance. PPT.</p>
+                  </div>
+                </a>
+                <a href="#" class="note-card" style="padding:0.75rem;">
+                  <i class="fa-solid fa-video" style="color:var(--primary-light);"></i>
+                  <div class="note-details">
+                    <h5 style="font-weight:700; font-size:0.85rem;">Video: CSS Box Model Simply Explained</h5>
+                    <p>whiteboard walk-through of margins, borders, and paddings. Link.</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- FAQs and Basic Programming Exercises -->
+            <div class="card">
+              <div class="card-title"><i class="fa-solid fa-terminal"></i> Basic Practice Assignments & MCQs</div>
+              
+              <h5 style="font-weight:700; font-size:0.9rem; color:var(--primary);">Basic Programming Exercise:</h5>
+              <div style="background:var(--bg-main); border:1px solid var(--border-color); border-radius:var(--radius-sm); padding:0.75rem; margin-top:0.4rem; font-family:monospace; font-size:0.8rem; margin-bottom:1rem;">
+                // Task: Write a Java class to implement a subclass inheritance framework.<br>
+                // Goal: Understand object creation and function overriding variables.
+              </div>
+
+              <h5 style="font-weight:700; font-size:0.9rem; color:var(--primary); margin-bottom:0.4rem;">Practice MCQs & Core FAQs:</h5>
+              <ul style="padding-left:1.2rem; font-size:0.85rem; color:var(--text-secondary);">
+                <li>What is the difference between a process and a thread? (Threads share code and data buffers)</li>
+                <li>Why do we need virtual memory paging? (To run programs larger than physical memory size)</li>
+              </ul>
+              
+              <a href="#" class="btn btn-outline-primary btn-sm" style="margin-top:1rem; width:100%; justify-content:center;">
+                <i class="fa-solid fa-circle-question"></i> Open Slow Learner Mock Quiz
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 14: ADVANCED LEARNER CORNER -->
+        <section class="panel" id="advanced-corner">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-rocket"></i> Advanced Learner Corner</div>
+            <span class="academic-badge">Academic Acceleration</span>
+          </div>
+
+          <div class="grid-2">
+            <!-- NPTEL & Research Papers links -->
+            <div class="card">
+              <div class="card-title"><i class="fa-solid fa-graduation-cap"></i> Research Resources & NPTEL Links</div>
+              <ul style="list-style:none; margin-top:1rem;">
+                <li style="padding:0.75rem; border:1px solid var(--border-color); border-radius:var(--radius-md); margin-bottom:0.75rem;">
+                  <h5 style="font-weight:700;">NPTEL Course Reference: Programming in Java (IIT Kharagpur)</h5>
+                  <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.5rem;">Advanced classes mapping socket connections and JDBC drivers.</p>
+                  <a href="https://nptel.ac.in" target="_blank" class="btn btn-sm btn-outline-primary">Open NPTEL <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </li>
+                <li style="padding:0.75rem; border:1px solid var(--border-color); border-radius:var(--radius-md); margin-bottom:0.75rem;">
+                  <h5 style="font-weight:700;">Research Paper: "Diagnosis of Cognitive skill impairment using Deep Learning"</h5>
+                  <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.5rem;">Recommended reading from IEEE Transactions on Neural Networks.</p>
+                  <a href="#" class="btn btn-sm btn-outline-primary">Download Reference PDF</a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Project ideas and coding contests -->
+            <div class="card">
+              <div class="card-title"><i class="fa-solid fa-code"></i> Projects & Coding Hackathons</div>
+              
+              <h5 style="font-weight:700; font-size:0.9rem; color:var(--primary);">Recommended Mini Projects:</h5>
+              <ul style="padding-left:1.2rem; font-size:0.85rem; color:var(--text-secondary); margin-bottom:1rem;">
+                <li>Implement a multi-client concurrent Java Chat Server with JWT tokens.</li>
+                <li>Design an AI-driven book recommender web portal using Flask and Power BI analytics.</li>
+              </ul>
+
+              <h5 style="font-weight:700; font-size:0.9rem; color:var(--primary);">Competitive Programming & Open Source:</h5>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:0.5rem;">Platform Links to test advanced algorithms logic:</p>
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                <a href="https://leetcode.com" target="_blank" class="meta-pill" style="background:var(--accent-light); color:var(--primary-light);">LeetCode Contest</a>
+                <a href="https://codeforces.com" target="_blank" class="meta-pill" style="background:var(--accent-light); color:var(--primary-light);">CodeForces Round</a>
+                <a href="https://github.com" target="_blank" class="meta-pill" style="background:var(--accent-light); color:var(--primary-light);">GitHub Open Source repos</a>
+              </div>
+
+              <h5 style="font-weight:700; font-size:0.9rem; color:var(--primary); margin-top:1rem; margin-bottom:0.3rem;">Hackathon Board Calendar:</h5>
+              <div style="font-size:0.8rem; color:var(--text-secondary);">
+                <i class="fa-solid fa-calendar-day"></i> <strong>Smart India Hackathon (SIH 2026):</strong> Nominations open till August 25. Submit initial project outlines to Mrs. Sunita R. Patil.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 15: RESEARCH WORK -->
+        <section class="panel" id="research">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-flask"></i> Research Publications & Patents</div>
+            <span class="academic-badge">Academic Indexing</span>
+          </div>
+
+          <div class="widgets-grid" style="margin-bottom:1.5rem;">
+            <div class="widget-card">
+              <div class="widget-info">
+                <span class="label">Patents Published</span>
+                <h4 style="font-size:1.15rem; font-weight:800; color:var(--primary-dark);">15 Patents</h4>
+                <p>Intellectual Property Registry</p>
+              </div>
+              <div class="widget-icon" style="color:#F58220;"><i class="fa-solid fa-lightbulb"></i></div>
+            </div>
+            <div class="widget-card">
+              <div class="widget-info">
+                <span class="label">Copyrights Registered</span>
+                <h4 style="font-size:1.15rem; font-weight:800; color:var(--primary-dark);">3 Copyrights</h4>
+                <p>Software Registry</p>
+              </div>
+              <div class="widget-icon" style="color:#A6CE39;"><i class="fa-solid fa-copyright"></i></div>
+            </div>
+            <a href="https://orcid.org/0000-0002-3921-4820" target="_blank" class="widget-card">
+              <div class="widget-info">
+                <span class="label">ORCID Registry ID</span>
+                <h4 style="font-size:1.15rem; font-weight:800; color:var(--primary-dark);">Verified Account</h4>
+                <p>Click to open ORCID profile</p>
+              </div>
+              <div class="widget-icon" style="color:#A6CE39;"><i class="fa-brands fa-orcid"></i></div>
+            </a>
+          </div>
+
+          <div class="grid-2">
+            <!-- Patents list -->
+            <div class="card">
+              <div class="card-title"><i class="fa-solid fa-lightbulb"></i> Patents & Book Publications</div>
+              <ul style="padding-left:1.2rem; font-size:0.85rem; color:var(--text-secondary); display:flex; flex-direction:column; gap:0.75rem;">
+                <li>
+                  <strong>[Patent]</strong> <em>"Intelligent Book Recommendation System using AI and Deep Learning"</em>, Application No. 202521022648, Filed: 13/03/2025, Published: 28/03/2025.
+                </li>
+                <li>
+                  <strong>[Patent]</strong> <em>"AI-Driven Cyber Attack Detection"</em>, Application No. 202521022739, Filed: 13/3/2025, Published: 28-03-2025.
+                </li>
+                <li>
+                  <strong>[Patent]</strong> <em>"ShellDB - Elite Technology for Unyielding Data Breach Countermeasures"</em>, Application No. 202521023350, Filed: 17/3/2025, Published: 28-03-2025.
+                </li>
+                <li>
+                  <strong>[Patent]</strong> <em>"A Nutrition Recommender System using Web Development, ML and Generative AI"</em>, Application No. 202521025798, Filed: 21-03-2025, Published: 04-04-2025.
+                </li>
+                <li>
+                  <strong>[Book Authored]</strong> Sunita Patil, <em>"Augmented & Virtual Reality"</em>, SPPU Course 2019-T.E. (Comp) Elective, Technical Publications, ISBN: 9789355850744, April-2022.
+                </li>
+              </ul>
+            </div>
+
+            <!-- Publications & Copyrights -->
+            <div class="card">
+              <div class="card-title"><i class="fa-solid fa-book"></i> Journal & Conference Publications</div>
+              <h5 style="font-weight:700; font-size:0.9rem; color:var(--primary); margin-bottom:0.4rem;">Selected Journal Papers:</h5>
+              <ul style="padding-left:1.2rem; font-size:0.82rem; color:var(--text-secondary); display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1rem;">
+                <li>
+                  Sunita Patil et al., <em>"Early detection of cognitive decline with deep learning and graph-based modeling"</em>, MethodsX, Vol. 14, 2025 (Scopus Indexed, Q1).
+                </li>
+                <li>
+                  Sunita Patil, <em>"Deep Reinforced Cognitive Analytics Algorithm (DRCAM) for early detection of Cognitive skill impairment"</em>, MethodsX, Vol. 14, 2025 (ESCI, Scopus Indexed).
+                </li>
+              </ul>
+
+              <h5 style="font-weight:700; font-size:0.9rem; color:var(--primary); margin-bottom:0.4rem;">Selected Conference Papers:</h5>
+              <ul style="padding-left:1.2rem; font-size:0.82rem; color:var(--text-secondary); display:flex; flex-direction:column; gap:0.5rem;">
+                <li>
+                  Sunita Patil and Swetta Kukreja, <em>"A Survey Paper Early Detection of Cognitive Skill Impairment"</em>, Proceedings of the 2025 IEEE Pune Section International Conference (PuneCon 2025).
+                </li>
+                <li>
+                  <em>"Smart Nutrition Analysis: AI-Based Food Quality Assessment"</em>, 9th IEEE International Conference ICCUBEA-2025 (Scopus Indexed).
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 16: TEACHER ACHIEVEMENTS -->
+        <section class="panel" id="achievements">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-award"></i> Teacher Achievements & Awards</div>
+            <span class="academic-badge">Academic Recognition</span>
+          </div>
+
+          <div class="grid-3">
+            <div class="card text-center" style="text-align: center;">
+              <i class="fa-solid fa-award" style="font-size:2.5rem; color:#d97706; margin-bottom:0.75rem;"></i>
+              <h4 style="font-weight:700; font-size:1rem; margin-bottom:0.25rem;">Durga Shakti Award</h4>
+              <p style="font-size:0.8rem; color:var(--text-muted);">March 2025</p>
+              <span style="font-size:0.78rem; color:var(--text-secondary); display:block; margin-top:0.5rem;">Received for excellent contributions to academic leadership and engineering education.</span>
+            </div>
+
+            <div class="card text-center" style="text-align: center;">
+              <i class="fa-solid fa-certificate" style="font-size:2.5rem; color:var(--primary-light); margin-bottom:0.75rem;"></i>
+              <h4 style="font-weight:700; font-size:1rem; margin-bottom:0.25rem;">AI Fluency Certificate</h4>
+              <p style="font-size:0.8rem; color:var(--text-muted);">June 2026</p>
+              <span style="font-size:0.78rem; color:var(--text-secondary); display:block; margin-top:0.5rem;">Successfully completed 'AI Fluency for Educators' specialized course.</span>
+            </div>
+
+            <div class="card text-center" style="text-align: center;">
+              <i class="fa-solid fa-trophy" style="font-size:2.5rem; color:var(--success); margin-bottom:0.75rem;"></i>
+              <h4 style="font-weight:700; font-size:1rem; margin-bottom:0.25rem;">Best Paper Award 2024</h4>
+              <p style="font-size:0.8rem; color:var(--text-muted);">ICCUBEA International Conf</p>
+              <span style="font-size:0.78rem; color:var(--text-secondary); display:block; margin-top:0.5rem;">Awarded for research paper on Cognitive Skill Impairment using Machine Learning.</span>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:1.5rem;">
+            <div class="card-title"><i class="fa-solid fa-briefcase"></i> Professional Activities & FDPs</div>
+            <ul style="padding-left:1.2rem; font-size:0.9rem; color:var(--text-secondary);">
+              <li>Conducted a 3-Week Skill Development Program (SDP) on "Core JAVA Technology" at Dr. D. Y. Patil Institute of Technology, Pimpri (2022).</li>
+              <li>Worked as BE-IT 2015 Pattern Syllabus Revision Coordinator for Savitribai Phule Pune University (SPPU).</li>
+              <li>Worked as Question Paper Setter for TY-B.Tech course (IT504) of Government College of Engineering, Karad.</li>
+              <li>Appointed Journal Reviewer & Editor for Scienxt Journal of Neural Networks and Deep Learning.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- SECTION 17: STUDENT RESOURCES -->
+        <section class="panel" id="resources">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-briefcase"></i> Student Resource Hub</div>
+            <span class="academic-badge">Academic Support</span>
+          </div>
+
+          <div class="grid-3">
+            <div class="card">
+              <h4 style="font-weight:800; font-size:1rem; color:var(--primary-dark); margin-bottom:0.75rem; border-bottom:1px solid var(--border-color); padding-bottom:0.4rem;">
+                <i class="fa-solid fa-university"></i> SPPU Circulars
+              </h4>
+              <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:1rem;">Official circular sheets relating to exam schedules, term extensions, and university regulations.</p>
+              <a href="http://unipune.ac.in" target="_blank" class="btn btn-sm btn-outline-primary">Open SPPU Portal <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </div>
+
+            <div class="card">
+              <h4 style="font-weight:800; font-size:1rem; color:var(--primary-dark); margin-bottom:0.75rem; border-bottom:1px solid var(--border-color); padding-bottom:0.4rem;">
+                <i class="fa-solid fa-calendar-day"></i> Academic Calendar
+              </h4>
+              <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:1rem;">Term schedules mapping holidays, mid-sem check dates, and final submission limits.</p>
+              <a href="#" class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-download"></i> Download Calendar</a>
+            </div>
+
+            <div class="card">
+              <h4 style="font-weight:800; font-size:1rem; color:var(--primary-dark); margin-bottom:0.75rem; border-bottom:1px solid var(--border-color); padding-bottom:0.4rem;">
+                <i class="fa-solid fa-file-invoice"></i> Examination Forms
+              </h4>
+              <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:1rem;">Direct links to fill out the end-semester examination sheets online.</p>
+              <a href="http://exam.unipune.ac.in" target="_blank" class="btn btn-sm btn-outline-primary">Fill Exam Form <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </div>
+
+            <div class="card">
+              <h4 style="font-weight:800; font-size:1rem; color:var(--primary-dark); margin-bottom:0.75rem; border-bottom:1px solid var(--border-color); padding-bottom:0.4rem;">
+                <i class="fa-solid fa-briefcase"></i> Internships & Placements
+              </h4>
+              <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:1rem;">Placement cell handbook with resumes templates, active internship links, and placement resource contacts.</p>
+              <a href="#" class="btn btn-sm btn-outline-primary">View Placement Hub</a>
+            </div>
+
+            <div class="card">
+              <h4 style="font-weight:800; font-size:1rem; color:var(--primary-dark); margin-bottom:0.75rem; border-bottom:1px solid var(--border-color); padding-bottom:0.4rem;">
+                <i class="fa-solid fa-laptop-code"></i> Coding Platforms
+              </h4>
+              <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:1rem;">Shortcuts to verify assignments on standard sandboxes and competitive tracks.</p>
+              <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                <a href="https://leetcode.com" target="_blank" class="meta-pill" style="font-size:0.7rem;">LeetCode</a>
+                <a href="https://hackerrank.com" target="_blank" class="meta-pill" style="font-size:0.7rem;">HackerRank</a>
+                <a href="https://github.com" target="_blank" class="meta-pill" style="font-size:0.7rem;">GitHub</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <h4 style="font-weight:800; font-size:1rem; color:var(--primary-dark); margin-bottom:0.75rem; border-bottom:1px solid var(--border-color); padding-bottom:0.4rem;">
+                <i class="fa-solid fa-flask-vial"></i> Virtual Labs
+              </h4>
+              <p style="font-size:0.8rem; color:var(--text-secondary); margin-bottom:1rem;">MHRD Govt virtual labs to run simulations on operating systems and java threads remotely.</p>
+              <a href="https://vlab.co.in" target="_blank" class="btn btn-sm btn-outline-primary">Open Virtual Lab <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 18: CHATBOT - TRIGGERED ONLY -->
+
+        <!-- SECTION 19: GALLERY -->
+        <section class="panel" id="gallery">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-images"></i> Department Event Gallery</div>
+            <span class="academic-badge">Campus Life</span>
+          </div>
+
+          <div class="gallery-grid">
+            <div class="gallery-card">
+              <img src="images/exhibition.jpg" alt="Project Exhibition">
+              <div class="gallery-overlay">
+                <h4>Project Exhibition 2026</h4>
+                <p>Final Year computer engineering students showing their IoT prototypes.</p>
+              </div>
+            </div>
+
+            <div class="gallery-card">
+              <img src="images/industrial.jpg" alt="Industrial Visit">
+              <div class="gallery-overlay">
+                <h4>Industrial Visit to Datacenter</h4>
+                <p>Cloud and Networking batch students examining bare-metal server structures.</p>
+              </div>
+            </div>
+
+            <div class="gallery-card">
+              <!-- Using CSS gradient fallback/placeholder for classroom as image 3 -->
+              <div style="width:100%; height:100%; background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%); display:flex; align-items:center; justify-content:center; color:#fff; font-size:3rem;"><i class="fa-solid fa-chalkboard-user"></i></div>
+              <div class="gallery-overlay">
+                <h4>AI Fluency Seminar</h4>
+                <p>Interactive FDP seminar session covering artificial intelligence tools in academics.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 20: STUDENT FEEDBACK -->
+        <section class="panel" id="feedback">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-comment-dots"></i> Student Feedback Form</div>
+            <span class="academic-badge">Academic Quality Improvement</span>
+          </div>
+
+          <div class="card" style="max-width: 600px; margin: 0 auto;">
+            <div class="card-title"><i class="fa-solid fa-pen-to-square"></i> Anonymous Course Feedback</div>
+            <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1.5rem;">
+              Your constructive feedback helps in refining course delivery. This feedback goes anonymously to Mrs. Sunita Patil.
+            </p>
+            
+            <div class="feedback-form">
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.4rem; color:var(--text-secondary);">Your Name (Optional):</label>
+              <input type="text" id="feedbackNameInput" placeholder="Leave empty for anonymity">
+
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.4rem; color:var(--text-secondary);">Select Subject:</label>
+              <select id="feedbackSubjectSelect" style="width:100%; padding:0.75rem; border:1px solid var(--border-color); border-radius:var(--radius-md); margin-bottom:1rem;">
+                <option value="WE">Web Engineering (WE)</option>
+                <option value="OS">Operating System (OS)</option>
+                <option value="JAVA">Core JAVA Programming</option>
+              </select>
+
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.4rem; color:var(--text-secondary);">Course Quality Rating:</label>
+              <div class="star-rating" id="feedbackStarRating">
+                <i class="fa-solid fa-star" data-value="1" onclick="rateFeedback(1)"></i>
+                <i class="fa-solid fa-star" data-value="2" onclick="rateFeedback(2)"></i>
+                <i class="fa-solid fa-star" data-value="3" onclick="rateFeedback(3)"></i>
+                <i class="fa-solid fa-star" data-value="4" onclick="rateFeedback(4)"></i>
+                <i class="fa-solid fa-star" data-value="5" onclick="rateFeedback(5)"></i>
+              </div>
+
+              <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.4rem; color:var(--text-secondary);">Feedback Comments & Suggestions:</label>
+              <textarea id="feedbackCommentsInput" rows="4" placeholder="Share your experience or suggestions for laboratory assignments..."></textarea>
+
+              <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="submitFeedbackMock()"><i class="fa-solid fa-paper-plane"></i> Submit Feedback Report</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 21: FAQ -->
+        <section class="panel" id="faq">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-circle-question"></i> Academic FAQs & Rules</div>
+            <span class="academic-badge">Syllabus & Code of Conduct</span>
+          </div>
+
+          <div class="accordion-item" id="faq-1">
+            <div class="accordion-header" onclick="toggleAccordion('faq-1')">
+              <span>What is the attendance criteria to qualify for SPPU examinations?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="accordion-content">
+              <p style="font-size:0.9rem; color:var(--text-secondary);">
+                As per SPPU and institute norms, a minimum of 75% attendance in both lectures and practical sessions is mandatory. Students falling below this threshold will be flagged for remedial tasks, and failure to comply may result in term work detention.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-item" id="faq-2">
+            <div class="accordion-header" onclick="toggleAccordion('faq-2')">
+              <span>Can I get an extension on assignment deadlines?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="accordion-content">
+              <p style="font-size:0.9rem; color:var(--text-secondary);">
+                Extensions are granted only in cases of documented medical emergency or official college representation. You must submit a request letter to Mrs. Sunita Patil prior to the due date. Late submissions without approvals will face a 20% mark deduction penalty per day.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-item" id="faq-3">
+            <div class="accordion-header" onclick="toggleAccordion('faq-3')">
+              <span>How are laboratory term-work marks calculated?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="accordion-content">
+              <p style="font-size:0.9rem; color:var(--text-secondary);">
+                Term work marks (typically out of 25 or 50) are continuous assessments. They map: 40% on timely lab code validation, 30% on write-up completeness, 20% on weekly viva readiness, and 10% on attendance records.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-item" id="faq-4">
+            <div class="accordion-header" onclick="toggleAccordion('faq-4')">
+              <span>What is the exam pattern for the Practical and Viva-Voce?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <div class="accordion-content">
+              <p style="font-size:0.9rem; color:var(--text-secondary);">
+                Practical exams consist of a 1-hour coding session based on random slips containing course assignments. This is followed by a 10-minute viva session by an external examiner covering theory definitions, code modifications, and course objectives.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 22: CONTACT -->
+        <section class="panel" id="contact">
+          <div class="section-header">
+            <div class="section-title"><i class="fa-solid fa-address-book"></i> Faculty Contact Information</div>
+            <span class="academic-badge">Direct Access Channels</span>
+          </div>
+
+          <div class="grid-2">
+            <!-- Contact Card left -->
+            <div class="card">
+              <div class="card-title"><i class="fa-solid fa-user-check"></i> Office Coordinates</div>
+              <ul class="contact-quick-list" style="margin-top:1.5rem; font-size:0.95rem;">
+                <li style="margin-bottom:1.25rem;"><i class="fa-solid fa-envelope" style="font-size:1.2rem;"></i> <span><strong>Faculty Email:</strong> sunita.patil@dypvp.edu.in</span></li>
+                <li style="margin-bottom:1.25rem;"><i class="fa-solid fa-envelope" style="font-size:1.2rem;"></i> <span><strong>Personal Email:</strong> sunitapatil6@gmail.com</span></li>
+                <li style="margin-bottom:1.25rem;"><i class="fa-solid fa-location-dot" style="font-size:1.2rem;"></i> <span><strong>Office Location:</strong> IT Block, Department of Computer Engineering, Dr. D. Y. Patil Institute of Technology, Pimpri, Pune.</span></li>
+                <li style="margin-bottom:1.25rem;"><i class="fa-solid fa-phone" style="font-size:1.2rem;"></i> <span><strong>Contact Phone:</strong> +91 9284480140 / +91 7875503877</span></li>
+                <li style="margin-bottom:1.25rem;"><i class="fa-solid fa-business-time" style="font-size:1.2rem;"></i> <span><strong>Official Consultation Hours:</strong> Monday & Wednesday (02:00 PM - 04:00 PM)</span></li>
+              </ul>
+              
+              <!-- Google map placeholder -->
+              <h5 style="font-weight:700; margin-top:1.5rem; margin-bottom:0.5rem;">DIT Campus Location:</h5>
+              <div style="width:100%; height:180px; background:#e2e8f0; border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-weight:600; border: 1px solid var(--border-color);">
+                <i class="fa-solid fa-map-location-dot" style="margin-right:0.5rem;"></i> Google Map Placeholder
+              </div>
+            </div>
+
+            <!-- Contact form -->
+            <div class="card">
+              <div class="card-title"><i class="fa-solid fa-paper-plane"></i> Send a Direct Message</div>
+              <p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:1rem;">
+                Have a quick query? Send a message here and Mrs. Sunita Patil will reply to your registered student email address.
+              </p>
+              <div class="contact-form">
+                <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.4rem; color:var(--text-secondary);">Your Name:</label>
+                <input type="text" id="contactNameInput" placeholder="Enter full name">
+
+                <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.4rem; color:var(--text-secondary);">Student Email Address:</label>
+                <input type="email" id="contactEmailInput" placeholder="Enter student email ID">
+
+                <label style="display:block; font-size:0.85rem; font-weight:600; margin-bottom:0.4rem; color:var(--text-secondary);">Message Content:</label>
+                <textarea id="contactMessageInput" rows="4" placeholder="Describe your query in detail..."></textarea>
+
+                <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="submitContactFormMock()"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- FLOATING CHATBOT WIDGET -->
+  <button class="chatbot-toggler" onclick="toggleChatbot()">
+    <i class="fa-solid fa-comment-dots" id="chatOpenIcon"></i>
+    <i class="fa-solid fa-xmark" id="chatCloseIcon" style="display:none;"></i>
+  </button>
+
+  <div class="chatbot-container" id="chatbotContainer">
+    <div class="chatbot-header">
+      <div class="chatbot-header-info">
+        <i class="fa-solid fa-robot"></i>
+        <div>
+          <h4>Academic Assistant Bot</h4>
+          <span>Offline Predefined Agent</span>
+        </div>
+      </div>
+      <button class="chatbot-close" onclick="toggleChatbot(false)">&times;</button>
+    </div>
+    
+    <div class="chatbot-messages" id="chatbotMessages">
+      <div class="chat-bubble bot">
+        Hello! I am Mrs. Sunita Patil's learning assistant. Ask me questions about:
+        <strong>Syllabus, Timetable, Assignment dates, Quiz links, Office hours, Contact info, or Exam pattern</strong>.
+      </div>
+    </div>
+
+    <!-- Quick suggest chips -->
+    <div class="chat-suggestions">
+      <span class="suggestion-chip" onclick="handleSuggestionClick('Show Syllabus')">Syllabus</span>
+      <span class="suggestion-chip" onclick="handleSuggestionClick('Class Timetable')">Timetable</span>
+      <span class="suggestion-chip" onclick="handleSuggestionClick('Assignment Deadlines')">Assignments</span>
+      <span class="suggestion-chip" onclick="handleSuggestionClick('Office Consultation Hours')">Office Hours</span>
+      <span class="suggestion-chip" onclick="handleSuggestionClick('Exam Pattern Info')">Exam Pattern</span>
+    </div>
+
+    <div class="chatbot-input-area">
+      <input type="text" id="chatInput" placeholder="Type keyword (e.g. syllabus)..." onkeypress="handleChatEnter(event)">
+      <button onclick="sendChatMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Core Javascript Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
